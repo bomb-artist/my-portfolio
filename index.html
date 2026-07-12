@@ -11,240 +11,227 @@
             padding: 0;
         }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background-color: #ffffff;
-            color: #000000;
-            line-height: 1.7;
-            padding: 60px 20px;
-        }
-        .main-container {
-            max-width: 940px;
-            margin: 0 auto;
+            color: #111111;
+            line-height: 1.6;
         }
         
-        header {
-            margin-bottom: 80px;
-            text-align: center;
-        }
-        .artist-name {
-            font-size: 2.2rem;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            margin-bottom: 10px;
-        }
-        .artist-title {
-            font-size: 0.85rem;
-            color: #767676;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .profile-section {
+        /* G13 Gallery Layout Style */
+        .wrapper {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 50px;
-            margin-bottom: 100px;
-            align-items: start;
+            min-height: 100vh;
         }
-        @media (min-width: 768px) {
-            .profile-section {
-                grid-template-columns: 240px 1fr;
+        
+        @media (min-width: 992px) {
+            .wrapper {
+                grid-template-columns: 320px 1fr;
             }
         }
-        .profile-img-container {
-            text-align: center;
+
+        /* Sidebar (Left Side) - ข้อมูลศิลปิน */
+        .sidebar {
+            padding: 60px 40px;
+            border-bottom: 1px solid #eeeeee;
+            background-color: #ffffff;
+        }
+        
+        @media (min-width: 992px) {
+            .sidebar {
+                position: fixed;
+                width: 320px;
+                height: 100vh;
+                border-bottom: none;
+                border-right: 1px solid #eeeeee;
+                overflow-y: auto;
+            }
+        }
+
+        .brand h1 {
+            font-size: 1.6rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+        .brand .subtitle {
+            font-size: 0.75rem;
+            color: #777777;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+        }
+
+        .profile-box {
+            margin-bottom: 40px;
         }
         .profile-img {
-            width: 100%;
-            max-width: 200px;
-            height: auto;
-            aspect-ratio: 1/1;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             object-fit: cover;
             filter: grayscale(100%);
             border: 1px solid #e5e5e5;
-            transition: filter 0.4s ease;
+            margin-bottom: 15px;
         }
-        .profile-img:hover {
-            filter: grayscale(0%);
-        }
-        
-        .bio-content {
-            font-size: 0.95rem;
-            color: #1a1a1a;
-        }
-        .bio-meta {
-            font-size: 0.9rem;
-            color: #767676;
+
+        .cv-section {
             margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
-        .cv-section-title {
-            font-size: 0.9rem;
+        .cv-title {
+            font-size: 0.8rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin: 40px 0 15px 0;
+            margin-bottom: 15px;
             color: #000000;
-            border-bottom: 1px solid #e5e5e5;
-            padding-bottom: 5px;
         }
         .cv-item {
+            font-size: 0.85rem;
+            color: #444444;
             margin-bottom: 12px;
-            font-size: 0.9rem;
-            color: #333333;
-            display: flex;
-            align-items: flex-start;
+            list-style: none;
         }
-        .cv-year {
-            font-weight: 600;
+        .cv-item strong {
             color: #000000;
-            min-width: 60px;
             display: inline-block;
-        }
-        .cv-text {
-            flex: 1;
+            width: 45px;
         }
 
-        .gallery-container {
-            margin-top: 80px;
+        /* Main Content (Right Side) - พื้นที่แสดงงานศิลปะกว้างๆ */
+        .main-content {
+            padding: 60px 40px;
+        }
+        
+        @media (min-width: 992px) {
+            .main-content {
+                margin-left: 0;
+                padding: 80px 80px;
+            }
+        }
+
+        .section-header {
+            margin-bottom: 50px;
         }
         .series-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 400;
             text-transform: uppercase;
             letter-spacing: 3px;
-            margin-bottom: 40px;
             color: #000000;
-            text-align: center;
         }
+
+        /* Gallery Grid Display */
         .gallery-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 80px;
+            gap: 60px;
+            max-width: 900px;
         }
+
         .art-card {
-            background: #ffffff;
+            margin-bottom: 20px;
         }
         .art-image-wrapper {
             background-color: #fafafa;
-            border: 1px solid #eeeeee;
+            border: 1px solid #f5f5f5;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .art-img {
             width: 100%;
             height: auto;
-            max-height: 700px;
+            max-height: 750px;
             object-fit: contain;
             display: block;
-            margin: 0 auto;
-        }
-        .art-meta {
-            padding-top: 5px;
-            text-align: center;
-        }
-        .art-title-text {
-            font-size: 1.05rem;
-            font-weight: 600;
-            font-style: italic;
-            margin-bottom: 6px;
-            letter-spacing: 0.5px;
-        }
-        .art-details-text {
-            font-size: 0.85rem;
-            color: #666666;
-            line-height: 1.6;
         }
 
-        footer {
-            margin-top: 140px;
-            border-top: 1px solid #e5e5e5;
-            padding-top: 40px;
-            text-align: center;
+        .art-meta {
+            padding-left: 5px;
+        }
+        .art-title-text {
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-style: italic;
+            margin-bottom: 4px;
+        }
+        .art-details-text {
             font-size: 0.8rem;
-            color: #888888;
-            letter-spacing: 1px;
+            color: #666666;
+            line-height: 1.5;
         }
-        .footer-links {
-            margin-bottom: 15px;
+
+        /* Footer inside Sidebar */
+        .sidebar-footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #eeeeee;
+            font-size: 0.75rem;
+            color: #999999;
         }
-        .footer-links a {
+        .sidebar-footer a {
             color: #000000;
             text-decoration: none;
-            margin: 0 10px;
             font-weight: 600;
+            display: block;
+            margin-bottom: 10px;
         }
-        .footer-links a:hover {
-            color: #767676;
+        .sidebar-footer a:hover {
+            color: #666666;
         }
     </style>
 </head>
 <body>
 
-    <div class="main-container">
+    <div class="wrapper">
         
-        <header>
-            <h1 class="artist-name">Sittiphon Lochaisong</h1>
-            <div class="artist-title">AKA Bomb / Independent Artist</div>
-        </header>
-
-        <section class="profile-section">
-            <div class="profile-img-container">
-                <!-- แก้ไข: เปลี่ยนชื่อไฟล์รูปให้ตรงกับที่คุณใช้อยู่ -->
-                <img src="assets/profile/bomb-sittiphon.jpg" alt="Sittiphon Lochaisong" class="profile-img" onerror="this.src='https://placehold.co/200/fafafa/000000?text=Sittiphon'">
+        <!-- ฝั่งซ้าย: ข้อมูลประวัติคงที่แบบเว็บแกลเลอรีระดับโลก -->
+        <aside class="sidebar">
+            <div class="brand">
+                <h1>Sittiphon<br>Lochaisong</h1>
+                <div class="subtitle">AKA Bomb / Artist</div>
             </div>
-            <div class="bio-content">
-                <div class="bio-meta">
-                    Born: 3 March 1991 / Mahasarakham, Thailand
-                </div>
-                
-                <div class="cv-section-title">Education</div>
-                <div class="cv-item">
-                    <div class="cv-text">• MFA Visual Arts (Thai Art), Faculty of Painting, Sculpture and Graphic Arts, Silpakorn University, Thailand</div>
-                </div>
-                <div class="cv-item">
-                    <div class="cv-text">• BFA Visual Arts (Thai Art), Faculty of Painting, Sculpture and Graphic Arts, Silpakorn University, Thailand</div>
-                </div>
 
-                <div class="cv-section-title">Solo Exhibitions</div>
-                <div class="cv-item">
-                    <span class="cv-year">2026</span>
-                    <div class="cv-text">“Rhythm of The Season”, House of Rhythm, Bangkok, Thailand</div>
-                </div>
-                <div class="cv-item">
-                    <span class="cv-year">2022</span>
-                    <div class="cv-text">“Feel Free to Rest”, Element Kuala Lumpur Inham, Kuala Lumpur, Malaysia</div>
-                </div>
-                <div class="cv-item">
-                    <span class="cv-year">2022</span>
-                    <div class="cv-text">“Forest Sense”, ASEAN Art in Residence Program At Rimbun Dahan, Kuala Lumpur, Malaysia</div>
-                </div>
-                <div class="cv-item">
-                    <span class="cv-year">2022</span>
-                    <div class="cv-text">“Dissection of Breathing”, People’s Gallery, BACC, Bangkok, Thailand</div>
-                </div>
-                <div class="cv-item">
-                    <span class="cv-year">2020</span>
-                    <div class="cv-text">“Characteristics of Time”, G13 Gallery, Malaysia</div>
-                </div>
-                <div class="cv-item">
-                    <span class="cv-year">2017</span>
-                    <div class="cv-text">“Idealistic Universe”, Fondazione Mudima, Milan, Italy</div>
-                </div>
+            <div class="profile-box">
+                <img src="assets/profile/bomb-sittiphon.jpg" alt="Sittiphon Lochaisong" class="profile-img" onerror="this.src='assets/profile/bomb.jpg'">
+                <div class="cv-item" style="color: #777; font-size: 0.8rem;">Born: 1991, Mahasarakham, Thailand</div>
             </div>
-        </section>
 
-        <section class="gallery-container">
-            <h2 class="series-title">Idealistic Universe Series</h2>
+            <div class="cv-section">
+                <h3 class="cv-title">Education</h3>
+                <li class="cv-item">• MFA Visual Arts, Silpakorn University, Thailand</li>
+                <li class="cv-item">• BFA Visual Arts, Silpakorn University, Thailand</li>
+            </div>
+
+            <div class="cv-section">
+                <h3 class="cv-title">Solo Exhibitions</h3>
+                <li class="cv-item"><strong>2026</strong> “Rhythm of The Season”, House of Rhythm, Bangkok</li>
+                <li class="cv-item"><strong>2022</strong> Feel Free to Rest, Element Kuala Lumpur, Malaysia</li>
+                <li class="cv-item"><strong>2022</strong> Forest Sense, Rimbun Dahan, Kuala Lumpur, Malaysia</li>
+                <li class="cv-item"><strong>2022</strong> Dissection of Breathing, BACC, Bangkok</li>
+                <li class="cv-item"><strong>2020</strong> Characteristics of Time, G13 Gallery, Malaysia</li>
+                <li class="cv-item"><strong>2017</strong> Idealistic Universe, Fondazione Mudima, Milan, Italy</li>
+            </div>
+
+            <div class="sidebar-footer">
+                <a href="https://www.instagram.com/bomb_stp/" target="_blank">Instagram</a>
+                <p>&copy; 2026 Sittiphon Lochaisong.</p>
+            </div>
+        </aside>
+
+        <!-- ฝั่งขวา: พื้นที่จัดแสดงรูปภาพผลงานเด่นชัด เต็มตา -->
+        <main class="main-content">
+            <div class="section-header">
+                <h2 class="series-title">Idealistic Universe Series</h2>
+            </div>
             
             <div class="gallery-grid">
-                <!-- ผลงานชิ้นที่ 1: Deep Free Present -->
                 <div class="art-card">
                     <div class="art-image-wrapper">
-                        <img src="artwoks/idealistic-universe/deep-free-presence.jpg" alt="Deep Free Presence" class="art-img" onerror="this.src='https://placehold.co/800x500/fafafa/cccccc?text=Deep+Free+Presence'">
+                        <!-- แก้ไขการดักจับชื่อไฟล์ภาพให้เรียบร้อย -->
+                        <img src="artwoks/idealistic-universe/deep-free-presence.jpg" alt="Deep Free Presence" class="art-img" onerror="this.src='artwoks/idealistic-universe/deep-free-present.jpg'">
                     </div>
                     <div class="art-meta">
                         <div class="art-title-text">Deep Free Presence</div>
@@ -255,17 +242,8 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- ในอนาคต บอมบ์สามารถเพิ่มการ์ดผลงานชิ้นอื่นๆ ต่อจากตรงนี้ได้เลยครับ -->
             </div>
-        </section>
-
-        <footer>
-            <div class="footer-links">
-                <a href="https://www.instagram.com/bomb_stp/" target="_blank">Instagram</a>
-            </div>
-            <p>&copy; 2026 Sittiphon Lochaisong. All rights reserved.</p>
-        </footer>
+        </main>
 
     </div>
 
