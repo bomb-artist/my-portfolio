@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bomb - Sittiphon Lochaisong | Portfolio</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0a;
+            color: #ffffff;
+        }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(to bottom, #111, #0a0a0a);
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #fff;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin: 10px 0;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+        }
+        p.subtitle {
+            color: #aaa;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .gallery-title {
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .art-card {
+            background-color: #161616;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+        .art-card:hover {
+            transform: translateY(-5px);
+        }
+        .art-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+        .art-info {
+            padding: 20px;
+        }
+        .art-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .art-details {
+            color: #888;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #555;
+            font-size: 0.85em;
+            border-top: 1px solid #111;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- ดึงรูปโปรไฟล์ของคุณมาแสดง -->
+        <img src="assets/profile/bomb.jpg" alt="Sittiphon Lochaisong" class="profile-img" onerror="this.style.display='none'">
+        <h1>Sittiphon Lochaisong</h1>
+        <p class="subtitle">AKA Bomb | Independent Artist</p>
+    </header>
+
+    <div class="container">
+        <div class="gallery-title">Idealistic Universe Series</div>
+        
+        <div class="gallery">
+            <!-- การ์ดผลงานชิ้นที่ 1 -->
+            <div class="art-card">
+                <img src="assets/artwoks/idealistic-universe/blossoming-2021.jpg" alt="Blossoming" class="art-img">
+                <div class="art-info">
+                    <div class="art-name">Blossoming</div>
+                    <div class="art-details">
+                        Glow Pigments on Canvas<br>
+                        120 x 100 cm.<br>
+                        2021 (view in the dark)
+                    </div>
+                </div>
+            </div>
+
+            <!-- บอมบ์สามารถเพิ่มการ์ดผลงานชิ้นต่อไปตรงนี้ได้ในอนาคตครับ -->
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Sittiphon Lochaisong. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
