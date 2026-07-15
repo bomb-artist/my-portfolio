@@ -1,251 +1,920 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sittiphon Lochaisong | Official Website</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #ffffff;
-            color: #111111;
-            line-height: 1.6;
-        }
-        
-        /* G13 Gallery Layout Style */
-        .wrapper {
-            display: grid;
-            grid-template-columns: 1fr;
-            min-height: 100vh;
-        }
-        
-        @media (min-width: 992px) {
-            .wrapper {
-                grid-template-columns: 320px 1fr;
-            }
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sittiphon Lochaisong (Bomb) — Idealistic Universe</title>
+<meta name="description" content="Official website of Thai painter Sittiphon Lochaisong (Bomb). Explore the Idealistic Universe series in an interactive 3D gallery.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --white:#ffffff;
+  --off-white:#f7f6f3;
+  --linen:#f2efe8;
+  --ink:#121212;
+  --graphite:#5a584f;
+  --line:#e3e1da;
+  --accent:#1c2b4a;
+  --accent-soft:#3d4f7a;
+  --serif:'Fraunces', Georgia, serif;
+  --sans:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono:'IBM Plex Mono', monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--sans);
+  background:var(--white);
+  color:var(--ink);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+a{color:inherit;}
+img{max-width:100%; display:block;}
+::selection{background:var(--accent); color:#fff;}
 
-        /* Sidebar (Left Side) - ข้อมูลศิลปิน */
-        .sidebar {
-            padding: 60px 40px;
-            border-bottom: 1px solid #eeeeee;
-            background-color: #ffffff;
-        }
-        
-        @media (min-width: 992px) {
-            .sidebar {
-                position: fixed;
-                width: 320px;
-                height: 100vh;
-                border-bottom: none;
-                border-right: 1px solid #eeeeee;
-                overflow-y: auto;
-            }
-        }
+/* Focus visibility */
+a:focus-visible, button:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:3px;
+}
 
-        .brand h1 {
-            font-size: 1.6rem;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            line-height: 1.2;
-            margin-bottom: 8px;
-        }
-        .brand .subtitle {
-            font-size: 0.75rem;
-            color: #777777;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 40px;
-        }
+/* ---------- NAV ---------- */
+.site-nav{
+  position:fixed; top:0; left:0; width:100%; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:22px 5vw;
+  transition:background .4s ease, border-color .4s ease, padding .3s ease;
+  border-bottom:1px solid transparent;
+}
+.site-nav.solid{
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+  padding:16px 5vw;
+}
+.nav-mark{
+  font-family:var(--serif); font-style:italic; font-weight:500;
+  font-size:1.05rem; letter-spacing:.02em;
+  color:var(--white);
+  transition:color .4s ease;
+  text-decoration:none;
+}
+.site-nav.solid .nav-mark{color:var(--ink);}
+.nav-links{display:flex; gap:36px; list-style:none;}
+.nav-links a{
+  font-family:var(--mono); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
+  color:rgba(255,255,255,.85); text-decoration:none;
+  transition:color .4s ease, opacity .2s ease;
+  padding-bottom:3px; border-bottom:1px solid transparent;
+}
+.site-nav.solid .nav-links a{color:var(--graphite);}
+.nav-links a:hover{border-color:currentColor;}
+.nav-toggle{display:none;}
+@media (max-width: 760px){
+  .nav-links{
+    position:fixed; top:0; right:0; height:100vh; width:min(78vw,320px);
+    background:var(--white); flex-direction:column; gap:0;
+    padding:100px 40px; transform:translateX(100%); transition:transform .4s ease;
+    box-shadow:-10px 0 40px rgba(0,0,0,.08);
+  }
+  .nav-links.open{transform:translateX(0);}
+  .nav-links a{color:var(--ink) !important; padding:16px 0; border-bottom:1px solid var(--line) !important;}
+  .nav-toggle{
+    display:block; z-index:110; background:none; border:none; cursor:pointer;
+    width:26px; height:20px; position:relative;
+  }
+  .nav-toggle span{
+    position:absolute; left:0; width:100%; height:1.5px; background:var(--white);
+    transition:all .3s ease;
+  }
+  .site-nav.solid .nav-toggle span, .nav-toggle.dark span{background:var(--ink);}
+  .nav-toggle span:nth-child(1){top:0;}
+  .nav-toggle span:nth-child(2){top:9px;}
+  .nav-toggle span:nth-child(3){top:18px;}
+  .nav-toggle.open span:nth-child(1){transform:translateY(9px) rotate(45deg);}
+  .nav-toggle.open span:nth-child(2){opacity:0;}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
+}
 
-        .profile-box {
-            margin-bottom: 40px;
-        }
-        .profile-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            filter: grayscale(100%);
-            border: 1px solid #e5e5e5;
-            margin-bottom: 15px;
-        }
+/* ---------- HERO ---------- */
+.hero{
+  position:relative; height:100vh; min-height:560px;
+  background:#060810;
+  overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+  text-align:center;
+}
+#starfield{position:absolute; inset:0; width:100%; height:100%;}
+.hero-content{position:relative; z-index:2; padding:0 24px; color:#fff;}
+.hero-eyebrow{
+  font-family:var(--mono); font-size:.7rem; letter-spacing:.28em; text-transform:uppercase;
+  color:rgba(255,255,255,.55); margin-bottom:22px;
+}
+.hero-th{
+  font-family:var(--serif); font-weight:400; font-size:clamp(2.1rem, 5.2vw, 4rem);
+  letter-spacing:.01em; margin-bottom:6px;
+}
+.hero-en{
+  font-family:var(--serif); font-style:italic; font-weight:300;
+  font-size:clamp(1rem, 2vw, 1.4rem); color:rgba(255,255,255,.75); margin-bottom:26px;
+}
+.hero-sub{
+  font-family:var(--sans); font-size:.9rem; color:rgba(255,255,255,.55);
+  max-width:440px; margin:0 auto;
+}
+.scroll-cue{
+  position:absolute; bottom:34px; left:50%; transform:translateX(-50%);
+  z-index:2; color:rgba(255,255,255,.55); font-family:var(--mono);
+  font-size:.68rem; letter-spacing:.18em; text-transform:uppercase;
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+}
+.scroll-cue .line{width:1px; height:34px; background:rgba(255,255,255,.35); animation:pulse-line 2s ease-in-out infinite;}
+@keyframes pulse-line{0%,100%{opacity:.3;}50%{opacity:1;}}
 
-        .cv-section {
-            margin-bottom: 30px;
-        }
-        .cv-title {
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            color: #000000;
-        }
-        .cv-item {
-            font-size: 0.85rem;
-            color: #444444;
-            margin-bottom: 12px;
-            list-style: none;
-        }
-        .cv-item strong {
-            color: #000000;
-            display: inline-block;
-            width: 45px;
-        }
+/* ---------- SECTION SHELL ---------- */
+.section{padding:120px 5vw; max-width:1400px; margin:0 auto;}
+.section-eyebrow{
+  font-family:var(--mono); font-size:.7rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--graphite); margin-bottom:14px;
+}
+.section-title{
+  font-family:var(--serif); font-weight:400; font-size:clamp(1.8rem,3.4vw,2.7rem);
+  margin-bottom:20px;
+}
+.section-lede{color:var(--graphite); max-width:620px; font-size:1rem;}
 
-        /* Main Content (Right Side) - พื้นที่แสดงงานศิลปะกว้างๆ */
-        .main-content {
-            padding: 60px 40px;
-        }
-        
-        @media (min-width: 992px) {
-            .main-content {
-                margin-left: 0;
-                padding: 80px 80px;
-            }
-        }
+/* ---------- 3D GALLERY ---------- */
+.gallery-section{
+  padding:0; max-width:none; background:#0d0e10; position:relative;
+}
+.gallery-stage{
+  position:relative; height:100vh; min-height:560px; width:100%;
+  cursor:grab;
+}
+.gallery-stage.dragging{cursor:grabbing;}
+#gallery-canvas{position:absolute; inset:0; width:100%; height:100%; display:block;}
+.gallery-header{
+  position:absolute; top:0; left:0; width:100%; z-index:5;
+  padding:110px 5vw 0; pointer-events:none; color:#fff;
+}
+.gallery-header .section-eyebrow{color:rgba(255,255,255,.55);}
+.gallery-header .section-title{color:#fff;}
+.gallery-hint{
+  position:absolute; top:110px; right:5vw; z-index:5; color:rgba(255,255,255,.6);
+  font-family:var(--mono); font-size:.7rem; letter-spacing:.06em; text-align:right;
+  line-height:1.8; pointer-events:none;
+}
+.gallery-loading{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  color:rgba(255,255,255,.5); font-family:var(--mono); font-size:.75rem; letter-spacing:.1em;
+  z-index:6; transition:opacity .5s ease;
+}
 
-        .section-header {
-            margin-bottom: 50px;
-        }
-        .series-title {
-            font-size: 1.1rem;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #000000;
-        }
+/* Filmstrip */
+.filmstrip-wrap{
+  position:absolute; bottom:0; left:0; width:100%; z-index:5;
+  background:linear-gradient(to top, rgba(0,0,0,.55), transparent);
+  padding:26px 5vw 20px;
+}
+.filmstrip{
+  display:flex; gap:10px; overflow-x:auto; scrollbar-width:thin;
+  padding-bottom:6px;
+}
+.filmstrip::-webkit-scrollbar{height:4px;}
+.filmstrip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.25);}
+.film-item{
+  flex:0 0 auto; width:64px; height:80px; border-radius:2px; cursor:pointer;
+  background:var(--linen); border:1px solid rgba(255,255,255,.15); opacity:.55;
+  transition:opacity .25s ease, transform .25s ease, border-color .25s ease;
+  position:relative; overflow:hidden;
+}
+.film-item.wide{width:120px;}
+.film-item:hover{opacity:.85; transform:translateY(-3px);}
+.film-item.active{opacity:1; border-color:#fff;}
+.film-item .fi-num{
+  position:absolute; bottom:3px; left:5px; font-family:var(--mono); font-size:.55rem;
+  color:var(--graphite);
+}
 
-        /* Gallery Grid Display */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 60px;
-            max-width: 900px;
-        }
+/* Detail panel */
+.detail-panel{
+  position:absolute; inset:0; z-index:20; display:flex; align-items:center; justify-content:center;
+  background:rgba(6,7,9,.86); backdrop-filter:blur(6px);
+  opacity:0; pointer-events:none; transition:opacity .35s ease;
+  padding:5vw;
+}
+.detail-panel.open{opacity:1; pointer-events:auto;}
+.detail-card{
+  display:grid; grid-template-columns:1fr 1fr; gap:56px; max-width:1000px; width:100%;
+  align-items:center;
+}
+@media (max-width:800px){.detail-card{grid-template-columns:1fr; gap:26px;}}
+.detail-image{
+  aspect-ratio:4/5; background:var(--linen); border:1px solid rgba(255,255,255,.12);
+  display:flex; align-items:center; justify-content:center; text-align:center; padding:30px;
+  position:relative;
+}
+.detail-image.wide{aspect-ratio:16/6;}
+.detail-image .ph-title{font-family:var(--serif); font-style:italic; font-size:1.3rem; color:var(--graphite);}
+.detail-image .ph-caption{font-family:var(--mono); font-size:.65rem; letter-spacing:.08em; color:#9a988e; margin-top:10px; text-transform:uppercase;}
+.detail-info{color:#fff;}
+.detail-cat{font-family:var(--mono); font-size:.72rem; letter-spacing:.14em; color:rgba(255,255,255,.5); margin-bottom:10px;}
+.detail-title{font-family:var(--serif); font-style:italic; font-weight:400; font-size:clamp(1.6rem,3vw,2.3rem); margin-bottom:16px;}
+.detail-meta{font-size:.92rem; color:rgba(255,255,255,.7); line-height:1.9;}
+.detail-nav{display:flex; gap:14px; margin-top:36px;}
+.detail-nav button{
+  font-family:var(--mono); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase;
+  background:none; border:1px solid rgba(255,255,255,.3); color:#fff; padding:11px 18px;
+  cursor:pointer; transition:background .2s ease, border-color .2s ease;
+}
+.detail-nav button:hover{background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.6);}
+.detail-close{
+  position:absolute; top:26px; right:5vw; background:none; border:none; color:#fff;
+  font-family:var(--mono); font-size:.75rem; letter-spacing:.1em; cursor:pointer;
+  display:flex; align-items:center; gap:8px; opacity:.75; transition:opacity .2s ease;
+}
+.detail-close:hover{opacity:1;}
 
-        .art-card {
-            margin-bottom: 20px;
-        }
-        .art-image-wrapper {
-            background-color: #fafafa;
-            border: 1px solid #f5f5f5;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
-        .art-img {
-            width: 100%;
-            height: auto;
-            max-height: 750px;
-            object-fit: contain;
-            display: block;
-        }
+/* ---------- CATALOG ---------- */
+.catalog-grid{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(230px,1fr)); gap:34px 24px;
+  margin-top:56px;
+}
+.cat-item{cursor:pointer;}
+.cat-thumb{
+  aspect-ratio:4/5; background:var(--linen); border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center; text-align:center; padding:18px;
+  transition:border-color .25s ease, transform .25s ease;
+  position:relative;
+}
+.cat-item.wide .cat-thumb{aspect-ratio:16/6;}
+.cat-item:hover .cat-thumb{border-color:var(--ink); transform:translateY(-3px);}
+.cat-thumb .ph-title{font-family:var(--serif); font-style:italic; font-size:1rem; color:var(--graphite);}
+.cat-thumb .ph-caption{font-family:var(--mono); font-size:.58rem; letter-spacing:.06em; color:#a8a69c; margin-top:8px; text-transform:uppercase;}
+.cat-meta{margin-top:14px;}
+.cat-num{font-family:var(--mono); font-size:.68rem; letter-spacing:.1em; color:var(--graphite);}
+.cat-title{font-family:var(--serif); font-style:italic; font-size:1.02rem; margin:3px 0 4px;}
+.cat-sub{font-size:.78rem; color:var(--graphite);}
 
-        .art-meta {
-            padding-left: 5px;
-        }
-        .art-title-text {
-            font-size: 0.95rem;
-            font-weight: 600;
-            font-style: italic;
-            margin-bottom: 4px;
-        }
-        .art-details-text {
-            font-size: 0.8rem;
-            color: #666666;
-            line-height: 1.5;
-        }
+/* ---------- ABOUT ---------- */
+.about-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:70px; margin-top:56px; align-items:start;}
+@media (max-width:860px){.about-grid{grid-template-columns:1fr; gap:44px;}}
+.about-portrait{
+  aspect-ratio:4/5; background:var(--linen); border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center; text-align:center; padding:30px;
+  position:sticky; top:110px;
+}
+@media (max-width:860px){.about-portrait{position:static;}}
+.about-portrait .ph-title{font-family:var(--serif); font-style:italic; font-size:1.1rem; color:var(--graphite);}
+.about-portrait .ph-caption{font-family:var(--mono); font-size:.6rem; letter-spacing:.08em; color:#a8a69c; margin-top:10px; text-transform:uppercase;}
+.about-bio p{margin-bottom:20px; color:#2c2b28; font-size:1.02rem; max-width:640px;}
+.about-block{margin-top:44px;}
+.about-block h3{
+  font-family:var(--mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--graphite); margin-bottom:18px; padding-bottom:10px; border-bottom:1px solid var(--line);
+}
+.cv-row{
+  display:flex; gap:22px; padding:10px 0; border-bottom:1px solid var(--line);
+  font-size:.9rem;
+}
+.cv-row:last-child{border-bottom:none;}
+.cv-year{font-family:var(--mono); color:var(--graphite); flex:0 0 52px;}
+.cv-desc em{font-style:italic;}
+.cv-desc .venue{color:var(--graphite);}
 
-        /* Footer inside Sidebar */
-        .sidebar-footer {
-            margin-top: 60px;
-            padding-top: 20px;
-            border-top: 1px solid #eeeeee;
-            font-size: 0.75rem;
-            color: #999999;
-        }
-        .sidebar-footer a {
-            color: #000000;
-            text-decoration: none;
-            font-weight: 600;
-            display: block;
-            margin-bottom: 10px;
-        }
-        .sidebar-footer a:hover {
-            color: #666666;
-        }
-    </style>
+/* ---------- CONTACT ---------- */
+.contact-section{background:var(--off-white);}
+.contact-grid{display:flex; flex-wrap:wrap; gap:60px; margin-top:50px;}
+.contact-block h4{
+  font-family:var(--mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--graphite); margin-bottom:12px;
+}
+.contact-block a, .contact-block span{
+  font-family:var(--serif); font-style:italic; font-size:1.2rem; text-decoration:none;
+  border-bottom:1px solid transparent; transition:border-color .2s ease;
+}
+.contact-block a:hover{border-color:var(--ink);}
+.contact-note{font-size:.75rem; color:#a8a69c; margin-top:6px; font-family:var(--mono);}
+
+/* ---------- FOOTER ---------- */
+footer{
+  padding:36px 5vw; display:flex; justify-content:space-between; align-items:center;
+  border-top:1px solid var(--line); font-family:var(--mono); font-size:.7rem; color:var(--graphite);
+  flex-wrap:wrap; gap:10px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  .scroll-cue .line{animation:none;}
+  *{transition-duration:.01ms !important; animation-duration:.01ms !important;}
+}
+</style>
 </head>
 <body>
 
-    <div class="wrapper">
-        
-        <!-- ฝั่งซ้าย: ข้อมูลประวัติคงที่แบบเว็บแกลเลอรีระดับโลก -->
-        <aside class="sidebar">
-            <div class="brand">
-                <h1>Sittiphon<br>Lochaisong</h1>
-                <div class="subtitle">AKA Bomb / Artist</div>
-            </div>
+<nav class="site-nav" id="siteNav">
+  <a href="#top" class="nav-mark">S. Lochaisong</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#gallery-3d">Gallery</a></li>
+    <li><a href="#catalog">Catalog</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-            <div class="profile-box">
-                <img src="assets/profile/bomb-sittiphon.jpg" alt="Sittiphon Lochaisong" class="profile-img" onerror="this.src='assets/profile/bomb.jpg'">
-                <div class="cv-item" style="color: #777; font-size: 0.8rem;">Born: 1991, Mahasarakham, Thailand</div>
-            </div>
+<header class="hero" id="top">
+  <canvas id="starfield"></canvas>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Painter · Bangkok, Thailand</div>
+    <div class="hero-th">สิทธิพนธ์ เลาะไชยสงค์</div>
+    <div class="hero-en">Sittiphon Lochaisong — known as Bomb</div>
+    <p class="hero-sub">Walk through the Idealistic Universe series in an interactive gallery, or browse the full catalog below.</p>
+  </div>
+  <div class="scroll-cue"><span class="line"></span>Scroll to enter</div>
+</header>
 
-            <div class="cv-section">
-                <h3 class="cv-title">Education</h3>
-                <li class="cv-item">• MFA Visual Arts, Silpakorn University, Thailand</li>
-                <li class="cv-item">• BFA Visual Arts, Silpakorn University, Thailand</li>
-            </div>
-
-            <div class="cv-section">
-                <h3 class="cv-title">Solo Exhibitions</h3>
-                <li class="cv-item"><strong>2026</strong> “Rhythm of The Season”, House of Rhythm, Bangkok</li>
-                <li class="cv-item"><strong>2022</strong> Feel Free to Rest, Element Kuala Lumpur, Malaysia</li>
-                <li class="cv-item"><strong>2022</strong> Forest Sense, Rimbun Dahan, Kuala Lumpur, Malaysia</li>
-                <li class="cv-item"><strong>2022</strong> Dissection of Breathing, BACC, Bangkok</li>
-                <li class="cv-item"><strong>2020</strong> Characteristics of Time, G13 Gallery, Malaysia</li>
-                <li class="cv-item"><strong>2017</strong> Idealistic Universe, Fondazione Mudima, Milan, Italy</li>
-            </div>
-
-            <div class="sidebar-footer">
-                <a href="https://www.instagram.com/bomb_stp/" target="_blank">Instagram</a>
-                <p>&copy; 2026 Sittiphon Lochaisong.</p>
-            </div>
-        </aside>
-
-        <!-- ฝั่งขวา: พื้นที่จัดแสดงรูปภาพผลงานเด่นชัด เต็มตา -->
-        <main class="main-content">
-            <div class="section-header">
-                <h2 class="series-title">Idealistic Universe Series</h2>
-            </div>
-            
-            <div class="gallery-grid">
-                <div class="art-card">
-                    <div class="art-image-wrapper">
-                        <!-- แก้ไขการดักจับชื่อไฟล์ภาพให้เรียบร้อย -->
-                        <img src="artwoks/idealistic-universe/deep-free-presence.jpg" alt="Deep Free Presence" class="art-img" onerror="this.src='artwoks/idealistic-universe/deep-free-present.jpg'">
-                    </div>
-                    <div class="art-meta">
-                        <div class="art-title-text">Deep Free Presence</div>
-                        <div class="art-details-text">
-                            Tempera Powder on Canvas<br>
-                            180 x 870 cm. / Triptych<br>
-                            2017
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-
+<section class="gallery-section" id="gallery-3d">
+  <div class="gallery-stage" id="galleryStage">
+    <canvas id="gallery-canvas"></canvas>
+    <div class="gallery-loading" id="galleryLoading">Preparing the gallery…</div>
+    <div class="gallery-header">
+      <div class="section-eyebrow">01 — Interactive</div>
+      <div class="section-title">Idealistic Universe</div>
     </div>
+    <div class="gallery-hint">Drag to look around<br>Scroll or ↑ / ↓ to walk<br>Click a work to view detail</div>
+    <div class="filmstrip-wrap">
+      <div class="filmstrip" id="filmstrip"></div>
+    </div>
+    <div class="detail-panel" id="detailPanel">
+      <button class="detail-close" id="detailClose">✕ Close</button>
+      <div class="detail-card" id="detailCard"></div>
+    </div>
+  </div>
+</section>
 
+<section class="section" id="catalog">
+  <div class="section-eyebrow">02 — Catalog</div>
+  <h2 class="section-title">Complete works, IU-01 – IU-12</h2>
+  <p class="section-lede">Twelve paintings in tempera powder on canvas, made in 2017. Photographs of the originals are being prepared — the panels below are placeholders standing in until they're uploaded.</p>
+  <div class="catalog-grid" id="catalogGrid"></div>
+</section>
+
+<section class="section" id="about">
+  <div class="section-eyebrow">03 — About</div>
+  <h2 class="section-title">The artist</h2>
+  <div class="about-grid">
+    <div class="about-portrait">
+      <div>
+        <div class="ph-title">Portrait</div>
+        <div class="ph-caption">Photograph pending</div>
+      </div>
+    </div>
+    <div>
+      <div class="about-bio">
+        <p>Sittiphon Lochaisong — known to friends and collectors as Bomb — is a Thai painter born in 1991 in Maha Sarakham, Thailand. He holds both a BFA and an MFA in Visual Arts from Silpakorn University.</p>
+        <p>His practice centers on tempera powder on canvas, a material he has returned to across a body of work spanning solo exhibitions in Thailand, Malaysia, and Italy. <em>Idealistic Universe</em> (2017), the twelve-part series presented in the gallery above, remains a touchstone in that practice.</p>
+        <p style="color:#a8a69c; font-size:.82rem; font-family:var(--mono);">Draft biography — Bomb, please review and edit this text before publishing.</p>
+      </div>
+      <div class="about-block">
+        <h3>Education</h3>
+        <div class="cv-row"><div class="cv-year">MFA</div><div class="cv-desc">Visual Arts, <span class="venue">Silpakorn University, Thailand</span></div></div>
+        <div class="cv-row"><div class="cv-year">BFA</div><div class="cv-desc">Visual Arts, <span class="venue">Silpakorn University, Thailand</span></div></div>
+      </div>
+      <div class="about-block">
+        <h3>Solo Exhibitions</h3>
+        <div class="cv-row"><div class="cv-year">2026</div><div class="cv-desc"><em>Rhythm of the Season</em>, <span class="venue">House of Rhythm, Bangkok</span></div></div>
+        <div class="cv-row"><div class="cv-year">2022</div><div class="cv-desc"><em>Feel Free to Rest</em>, <span class="venue">Element, Kuala Lumpur, Malaysia</span></div></div>
+        <div class="cv-row"><div class="cv-year">2022</div><div class="cv-desc"><em>Forest Sense</em>, <span class="venue">Rimbun Dahan, Kuala Lumpur, Malaysia</span></div></div>
+        <div class="cv-row"><div class="cv-year">2022</div><div class="cv-desc"><em>Dissection of Breathing</em>, <span class="venue">BACC, Bangkok</span></div></div>
+        <div class="cv-row"><div class="cv-year">2020</div><div class="cv-desc"><em>Characteristics of Time</em>, <span class="venue">G13 Gallery, Malaysia</span></div></div>
+        <div class="cv-row"><div class="cv-year">2017</div><div class="cv-desc"><em>Idealistic Universe</em>, <span class="venue">Fondazione Mudima, Milan, Italy</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section contact-section" id="contact">
+  <div class="section-eyebrow">04 — Contact</div>
+  <h2 class="section-title">Get in touch</h2>
+  <div class="contact-grid">
+    <div class="contact-block">
+      <h4>Email</h4>
+      <a href="mailto:bomb.stp@gmail.com">bomb.stp@gmail.com</a>
+    </div>
+    <div class="contact-block">
+      <h4>Phone</h4>
+      <a href="tel:+66969539704">096 953 9704</a>
+    </div>
+    <div class="contact-block">
+      <h4>Instagram</h4>
+      <a href="https://www.instagram.com/bomb_stp/" target="_blank" rel="noopener">@bomb_stp</a>
+    </div>
+    <div class="contact-block">
+      <h4>Facebook</h4>
+      <span>Link pending</span>
+      <div class="contact-note">Send the page URL to link this</div>
+    </div>
+    <div class="contact-block">
+      <h4>Twitter / X</h4>
+      <span>Link pending</span>
+      <div class="contact-note">Send the handle to link this</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Sittiphon Lochaisong</span>
+  <span>Idealistic Universe, 2017 — tempera powder on canvas</span>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+"use strict";
+
+var REDUCED_MOTION = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* =========================================================
+   ARTWORK DATA
+   ========================================================= */
+var ARTWORKS = [
+  {cat:'IU-01', title:'Deep',                     medium:'Tempera powder on canvas', year:'2017', dims:'Dimensions on request'},
+  {cat:'IU-02', title:'Fizz',                     medium:'Tempera powder on canvas', year:'2017', dims:'Dimensions on request'},
+  {cat:'IU-03', title:'Free',                     medium:'Tempera powder on canvas', year:'2017', dims:'Dimensions on request'},
+  {cat:'IU-04', title:'Full',                     medium:'Tempera powder on canvas', year:'2017', dims:'Dimensions on request'},
+  {cat:'IU-05', title:'Ing',                      medium:'Tempera powder on canvas', year:'2017', dims:'Dimensions on request'},
+  {cat:'IU-06', title:'Presence',                 medium:'Tempera powder on canvas', year:'2017', dims:'Dimensions on request'},
+  {cat:'IU-07', title:'Recalling',                medium:'Tempera powder on canvas', year:'2017', dims:'Dimensions on request'},
+  {cat:'IU-08', title:'Ring',                     medium:'Tempera powder on canvas', year:'2017', dims:'Dimensions on request'},
+  {cat:'IU-09', title:'Soft Gravity',             medium:'Tempera powder on canvas', year:'2017', dims:'Dimensions on request'},
+  {cat:'IU-10', title:'Idealistic Universe No. 1',medium:'Tempera powder on canvas', year:'2017', dims:'Dimensions on request'},
+  {cat:'IU-11', title:'Idealistic Universe No. 2',medium:'Tempera powder on canvas', year:'2017', dims:'Dimensions on request'},
+  {cat:'IU-12', title:'Deep Free Presence',       medium:'Tempera powder on canvas, triptych', year:'2017', dims:'180 × 870 cm', wide:true}
+];
+
+/* =========================================================
+   PLACEHOLDER TEXTURE GENERATOR (canvas-drawn, honest stand-in)
+   ========================================================= */
+function makePlaceholderCanvas(artwork, wide){
+  var w = wide ? 2048 : 1024, h = wide ? 420 : 1280;
+  var c = document.createElement('canvas');
+  c.width = w; c.height = h;
+  var ctx = c.getContext('2d');
+  ctx.fillStyle = '#f2efe8';
+  ctx.fillRect(0,0,w,h);
+  // subtle grain
+  for(var i=0;i<1800;i++){
+    ctx.fillStyle = 'rgba(0,0,0,'+(Math.random()*0.025)+')';
+    ctx.fillRect(Math.random()*w, Math.random()*h, 1, 1);
+  }
+  ctx.strokeStyle = 'rgba(0,0,0,0.14)';
+  ctx.lineWidth = 3;
+  ctx.strokeRect(18,18,w-36,h-36);
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(25,24,20,0.6)';
+  ctx.font = 'italic ' + (wide? 42:36) + 'px Georgia, serif';
+  ctx.fillText(artwork.title, w/2, h/2 - 6);
+  ctx.font = (wide?20:19) + 'px Georgia, serif';
+  ctx.fillStyle = 'rgba(25,24,20,0.4)';
+  ctx.fillText(artwork.cat + '  ·  photograph pending', w/2, h/2 + 30);
+  return c;
+}
+
+/* =========================================================
+   HERO STARFIELD
+   ========================================================= */
+(function starfield(){
+  var canvas = document.getElementById('starfield');
+  var ctx = canvas.getContext('2d');
+  var stars = [];
+  var w, h;
+
+  function resize(){
+    w = canvas.width = canvas.offsetWidth * (window.devicePixelRatio||1);
+    h = canvas.height = canvas.offsetHeight * (window.devicePixelRatio||1);
+    var count = Math.floor((w*h)/9000);
+    stars = [];
+    for(var i=0;i<count;i++){
+      stars.push({
+        x: Math.random()*w,
+        y: Math.random()*h,
+        r: Math.random()*1.4+0.3,
+        phase: Math.random()*Math.PI*2,
+        speed: Math.random()*0.5+0.2
+      });
+    }
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  var t = 0;
+  function tick(){
+    t += REDUCED_MOTION ? 0.002 : 0.012;
+    ctx.clearRect(0,0,w,h);
+    var grad = ctx.createRadialGradient(w/2,h*0.4,0, w/2,h*0.4, Math.max(w,h)*0.7);
+    grad.addColorStop(0, '#0f1424');
+    grad.addColorStop(1, '#05060b');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0,0,w,h);
+    for(var i=0;i<stars.length;i++){
+      var s = stars[i];
+      var tw = 0.5 + 0.5*Math.sin(t*s.speed + s.phase);
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(255,255,255,'+(0.25+0.65*tw)+')';
+      ctx.fill();
+    }
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+/* =========================================================
+   NAV BEHAVIOR
+   ========================================================= */
+(function nav(){
+  var siteNav = document.getElementById('siteNav');
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+
+  function onScroll(){
+    if(window.scrollY > window.innerHeight * 0.7){
+      siteNav.classList.add('solid');
+      toggle.classList.add('dark');
+    } else {
+      siteNav.classList.remove('solid');
+      toggle.classList.remove('dark');
+    }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  toggle.addEventListener('click', function(){
+    toggle.classList.toggle('open');
+    links.classList.toggle('open');
+  });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      toggle.classList.remove('open');
+      links.classList.remove('open');
+    });
+  });
+})();
+
+/* =========================================================
+   CATALOG GRID
+   ========================================================= */
+(function catalog(){
+  var grid = document.getElementById('catalogGrid');
+  ARTWORKS.forEach(function(a, i){
+    var item = document.createElement('div');
+    item.className = 'cat-item' + (a.wide ? ' wide' : '');
+    item.innerHTML =
+      '<div class="cat-thumb"><div><div class="ph-title">'+a.title+'</div>'+
+      '<div class="ph-caption">Photograph pending</div></div></div>'+
+      '<div class="cat-meta">'+
+        '<div class="cat-num">'+a.cat+'</div>'+
+        '<div class="cat-title">'+a.title+'</div>'+
+        '<div class="cat-sub">'+a.medium+' · '+a.dims+' · '+a.year+'</div>'+
+      '</div>';
+    item.addEventListener('click', function(){
+      document.getElementById('gallery-3d').scrollIntoView({behavior:'smooth'});
+      setTimeout(function(){ window.GALLERY && window.GALLERY.goTo(i, true); }, 500);
+    });
+    grid.appendChild(item);
+  });
+})();
+
+/* =========================================================
+   3D GALLERY (Three.js r128)
+   ========================================================= */
+(function gallery3d(){
+  var stage = document.getElementById('galleryStage');
+  var canvas = document.getElementById('gallery-canvas');
+  var loadingEl = document.getElementById('galleryLoading');
+  var filmstripEl = document.getElementById('filmstrip');
+  var detailPanel = document.getElementById('detailPanel');
+  var detailCard = document.getElementById('detailCard');
+  var detailClose = document.getElementById('detailClose');
+
+  if(typeof THREE === 'undefined'){
+    loadingEl.textContent = 'The 3D gallery could not load (script blocked). Please check your connection.';
+    return;
+  }
+
+  /* ---- Layout constants ---- */
+  var CORR_W = 12, CORR_H = 6.5;
+  var SPACING = 9, FIRST_Z = -10;
+  var sideWorks = ARTWORKS.slice(0,11);
+  var finaleWork = ARTWORKS[11];
+  var positions = sideWorks.map(function(a,i){
+    var z = FIRST_Z - i*SPACING;
+    var side = (i % 2 === 0) ? -1 : 1;
+    return {artwork:a, z:z, side:side, x: side*(CORR_W/2 - 0.06)};
+  });
+  var lastSideZ = positions[positions.length-1].z;
+  var END_WALL_Z = lastSideZ - SPACING - 6;
+  var WALL_Z_FRONT = 10;
+  var WALL_Z_BACK = END_WALL_Z - 4;
+  var CAM_Z_MAX = 6;
+  var CAM_Z_MIN = END_WALL_Z + 7;
+
+  var allEntries = positions.map(function(p, i){ return {artwork:p.artwork, index:i, z:p.z}; });
+  allEntries.push({artwork:finaleWork, index:11, z:END_WALL_Z+6});
+
+  /* ---- Scene ---- */
+  var scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x0d0e10);
+  scene.fog = new THREE.Fog(0x0d0e10, 20, 70);
+
+  var camera = new THREE.PerspectiveCamera(60, 1, 0.1, 300);
+  camera.position.set(0, 2.4, CAM_Z_MAX);
+
+  var renderer;
+  try{
+    renderer = new THREE.WebGLRenderer({canvas:canvas, antialias:true, alpha:false});
+  } catch(e){
+    loadingEl.textContent = 'Your browser could not start WebGL for the 3D gallery.';
+    return;
+  }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 2));
+
+  function sizeRenderer(){
+    var w = stage.clientWidth, h = stage.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w/h;
+    camera.updateProjectionMatrix();
+  }
+
+  /* ---- Lighting ---- */
+  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+  var fill = new THREE.DirectionalLight(0xffffff, 0.25);
+  fill.position.set(0, 10, 5);
+  scene.add(fill);
+
+  /* ---- Floor / ceiling / walls ---- */
+  var wallLen = WALL_Z_FRONT - WALL_Z_BACK;
+  var wallCenterZ = (WALL_Z_FRONT + WALL_Z_BACK)/2;
+
+  var floorMat = new THREE.MeshStandardMaterial({color:0xeae7e0, roughness:1, metalness:0});
+  var floor = new THREE.Mesh(new THREE.PlaneGeometry(CORR_W, wallLen), floorMat);
+  floor.rotation.x = -Math.PI/2;
+  floor.position.set(0, 0, wallCenterZ);
+  scene.add(floor);
+
+  var ceilMat = new THREE.MeshStandardMaterial({color:0xffffff, roughness:1});
+  var ceiling = new THREE.Mesh(new THREE.PlaneGeometry(CORR_W, wallLen), ceilMat);
+  ceiling.rotation.x = Math.PI/2;
+  ceiling.position.set(0, CORR_H, wallCenterZ);
+  scene.add(ceiling);
+
+  var wallMat = new THREE.MeshStandardMaterial({color:0xfbfaf7, roughness:1});
+  var leftWall = new THREE.Mesh(new THREE.PlaneGeometry(wallLen, CORR_H), wallMat);
+  leftWall.rotation.y = Math.PI/2;
+  leftWall.position.set(-CORR_W/2, CORR_H/2, wallCenterZ);
+  scene.add(leftWall);
+
+  var rightWall = new THREE.Mesh(new THREE.PlaneGeometry(wallLen, CORR_H), wallMat.clone());
+  rightWall.rotation.y = -Math.PI/2;
+  rightWall.position.set(CORR_W/2, CORR_H/2, wallCenterZ);
+  scene.add(rightWall);
+
+  var endWall = new THREE.Mesh(new THREE.PlaneGeometry(CORR_W, CORR_H), wallMat.clone());
+  endWall.position.set(0, CORR_H/2, END_WALL_Z - 0.05);
+  scene.add(endWall);
+
+  /* recessed ceiling light strips (decorative) */
+  var stripMat = new THREE.MeshBasicMaterial({color:0xfff8ec});
+  for(var lz = WALL_Z_FRONT-2; lz > WALL_Z_BACK+2; lz -= 6){
+    var strip = new THREE.Mesh(new THREE.BoxGeometry(CORR_W*0.5, 0.05, 0.6), stripMat);
+    strip.position.set(0, CORR_H-0.03, lz);
+    scene.add(strip);
+    var pl = new THREE.PointLight(0xfff2df, 0.5, 14, 2);
+    pl.position.set(0, CORR_H-0.4, lz);
+    scene.add(pl);
+  }
+
+  /* ---- Paintings ---- */
+  var paintingMeshes = [];
+  var frameDepth = 0.06;
+
+  function buildPainting(entry){
+    var a = entry.artwork;
+    var isWide = !!a.wide;
+    var pw = isWide ? 7.2 : 2.5;
+    var ph = isWide ? 1.6 : 3.1;
+    var canvasSrc = makePlaceholderCanvas(a, isWide);
+    var tex = new THREE.CanvasTexture(canvasSrc);
+    tex.needsUpdate = true;
+
+    var group = new THREE.Group();
+
+    var frame = new THREE.Mesh(
+      new THREE.BoxGeometry(pw+0.18, ph+0.18, frameDepth),
+      new THREE.MeshStandardMaterial({color:0x22201c, roughness:0.6})
+    );
+    frame.position.z = -frameDepth/2 - 0.01;
+    group.add(frame);
+
+    var art = new THREE.Mesh(
+      new THREE.PlaneGeometry(pw, ph),
+      new THREE.MeshStandardMaterial({map:tex, roughness:0.9})
+    );
+    art.userData.entryIndex = entry.index;
+    group.add(art);
+    paintingMeshes.push(art);
+
+    var spot = new THREE.SpotLight(0xfff2df, 1.1, 16, Math.PI/7, 0.5, 1.4);
+    spot.position.set(0, 1.6, 0.9);
+    spot.target = group;
+    group.add(spot);
+
+    return group;
+  }
+
+  positions.forEach(function(p, i){
+    var entry = allEntries[i];
+    var group = buildPainting(entry);
+    group.position.set(p.x, CORR_H/2, p.z);
+    group.rotation.y = p.side < 0 ? Math.PI/2 : -Math.PI/2;
+    scene.add(group);
+  });
+
+  (function(){
+    var entry = allEntries[allEntries.length-1];
+    var group = buildPainting(entry);
+    group.position.set(0, CORR_H/2 - 0.2, END_WALL_Z + 0.03);
+    scene.add(group);
+  })();
+
+  /* ---- Dust particles ---- */
+  var DUST_N = REDUCED_MOTION ? 0 : 260;
+  var dustGeo = new THREE.BufferGeometry();
+  var dustPos = new Float32Array(DUST_N*3);
+  var dustSpeed = new Float32Array(DUST_N);
+  for(var d=0; d<DUST_N; d++){
+    dustPos[d*3]   = (Math.random()-0.5)*CORR_W*0.9;
+    dustPos[d*3+1] = Math.random()*CORR_H;
+    dustPos[d*3+2] = WALL_Z_FRONT - Math.random()*wallLen;
+    dustSpeed[d] = 0.05 + Math.random()*0.08;
+  }
+  dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
+  var dustMat = new THREE.PointsMaterial({color:0xffffff, size:0.035, transparent:true, opacity:0.35, depthWrite:false});
+  var dust = new THREE.Points(dustGeo, dustMat);
+  scene.add(dust);
+
+  /* ---- Camera control state ---- */
+  var camZ = CAM_Z_MAX, targetZ = CAM_Z_MAX;
+  var yaw = 0, pitch = 0;
+  var dragging = false, lastX = 0, lastY = 0, dragMoved = 0;
+
+  function clamp(v,a,b){ return Math.max(a, Math.min(b,v)); }
+
+  canvas.addEventListener('pointerdown', function(e){
+    dragging = true; dragMoved = 0;
+    lastX = e.clientX; lastY = e.clientY;
+    stage.classList.add('dragging');
+  });
+  window.addEventListener('pointerup', function(e){
+    if(dragging && dragMoved < 6 && e.target === canvas){ handleSelect(e); }
+    dragging = false;
+    stage.classList.remove('dragging');
+  });
+  window.addEventListener('pointermove', function(e){
+    if(!dragging) return;
+    var dx = e.clientX - lastX, dy = e.clientY - lastY;
+    dragMoved += Math.abs(dx) + Math.abs(dy);
+    yaw = clamp(yaw - dx*0.0032, -1.3, 1.3);
+    pitch = clamp(pitch - dy*0.0026, -0.45, 0.45);
+    lastX = e.clientX; lastY = e.clientY;
+  });
+
+  canvas.addEventListener('wheel', function(e){
+    e.preventDefault();
+    targetZ = clamp(targetZ - e.deltaY*0.028, CAM_Z_MIN, CAM_Z_MAX);
+  }, {passive:false});
+
+  var keyState = {};
+  var hovering = false;
+  canvas.addEventListener('mouseenter', function(){ hovering = true; });
+  canvas.addEventListener('mouseleave', function(){ hovering = false; });
+  window.addEventListener('keydown', function(e){
+    if(!hovering) return;
+    if(['ArrowUp','ArrowDown','w','s','W','S'].indexOf(e.key) !== -1){
+      keyState[e.key] = true;
+      e.preventDefault();
+    }
+  });
+  window.addEventListener('keyup', function(e){ keyState[e.key] = false; });
+
+  function handleSelect(e){
+    var rect = canvas.getBoundingClientRect();
+    var mouse = new THREE.Vector2(
+      ((e.clientX-rect.left)/rect.width)*2 - 1,
+      -((e.clientY-rect.top)/rect.height)*2 + 1
+    );
+    var raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(mouse, camera);
+    var hits = raycaster.intersectObjects(paintingMeshes);
+    if(hits.length){
+      openDetail(hits[0].object.userData.entryIndex);
+    }
+  }
+
+  /* ---- Filmstrip ---- */
+  var filmItems = [];
+  allEntries.forEach(function(entry){
+    var el = document.createElement('div');
+    el.className = 'film-item' + (entry.artwork.wide ? ' wide' : '');
+    el.innerHTML = '<span class="fi-num">'+entry.artwork.cat+'</span>';
+    el.addEventListener('click', function(){ goTo(entry.index, true); });
+    filmstripEl.appendChild(el);
+    filmItems.push(el);
+  });
+
+  function setActiveFilm(index){
+    filmItems.forEach(function(el,i){ el.classList.toggle('active', i===index); });
+  }
+
+  function goTo(index, openIt){
+    var entry = allEntries[index];
+    targetZ = clamp(entry.z + (index===11 ? 0 : 0.4), CAM_Z_MIN, CAM_Z_MAX);
+    yaw = 0;
+    setActiveFilm(index);
+    if(openIt) openDetail(index);
+  }
+  window.GALLERY = {goTo: goTo};
+
+  /* ---- Detail panel ---- */
+  var currentDetail = -1;
+  function openDetail(index){
+    currentDetail = index;
+    var a = allEntries[index].artwork;
+    detailCard.innerHTML =
+      '<div class="detail-image'+(a.wide?' wide':'')+'"><div>'+
+        '<div class="ph-title">'+a.title+'</div>'+
+        '<div class="ph-caption">Photograph pending</div>'+
+      '</div></div>'+
+      '<div class="detail-info">'+
+        '<div class="detail-cat">'+a.cat+'</div>'+
+        '<div class="detail-title">'+a.title+'</div>'+
+        '<div class="detail-meta">'+a.medium+'<br>'+a.dims+'<br>'+a.year+'</div>'+
+        '<div class="detail-nav">'+
+          '<button data-dir="-1">← Prev</button>'+
+          '<button data-dir="1">Next →</button>'+
+        '</div>'+
+      '</div>';
+    detailCard.querySelectorAll('.detail-nav button').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var dir = parseInt(btn.getAttribute('data-dir'),10);
+        var next = (currentDetail + dir + allEntries.length) % allEntries.length;
+        goTo(next, true);
+      });
+    });
+    setActiveFilm(index);
+    detailPanel.classList.add('open');
+  }
+  detailClose.addEventListener('click', function(){ detailPanel.classList.remove('open'); });
+
+  /* ---- Resize ---- */
+  window.addEventListener('resize', sizeRenderer);
+  sizeRenderer();
+
+  /* ---- Animate loop ---- */
+  var clock = new THREE.Clock();
+  function animate(){
+    requestAnimationFrame(animate);
+    var dt = Math.min(clock.getDelta(), 0.05);
+
+    if(keyState['ArrowUp'] || keyState['w'] || keyState['W']) targetZ = clamp(targetZ - dt*6, CAM_Z_MIN, CAM_Z_MAX);
+    if(keyState['ArrowDown'] || keyState['s'] || keyState['S']) targetZ = clamp(targetZ + dt*6, CAM_Z_MIN, CAM_Z_MAX);
+
+    camZ += (targetZ - camZ) * (REDUCED_MOTION ? 1 : 0.08);
+    camera.position.z = camZ;
+    camera.rotation.order = 'YXZ';
+    camera.rotation.y = yaw;
+    camera.rotation.x = pitch;
+
+    if(!REDUCED_MOTION){
+      var pos = dustGeo.attributes.position.array;
+      for(var i=0;i<DUST_N;i++){
+        pos[i*3+1] += dustSpeed[i]*dt;
+        if(pos[i*3+1] > CORR_H) pos[i*3+1] = 0;
+      }
+      dustGeo.attributes.position.needsUpdate = true;
+    }
+
+    renderer.render(scene, camera);
+  }
+  loadingEl.style.opacity = '0';
+  setTimeout(function(){ loadingEl.style.display='none'; }, 500);
+  animate();
+})();
+
+})();
+</script>
 </body>
 </html>
